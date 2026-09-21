@@ -1,0 +1,28 @@
+Docker(containerization) + k8s(orchestration) + jenkins(CICD)
+==============================================================
+Docker
+========
+==>it is free and opensource software/tool.
+==>used to containeerazation --> we can run our application in any machine.
+==>container ==>application code + application dependencies (docker will take care of dependencies installtion
+                required for our app).
+==>it will make our app potaible using docker.
+
+Docker Architecture
+====================
+==>Docker file: use to specify where the app code and what dependencies are required for
+                app execution.
+==>Docker image: package which contains code + Dependencies.
+                 {docker image is like a blueprint (or template)}.
+                 it contains everthing needed to run applications: the codes runtime, libraries, environment variable, and configuration file.
+==>Docker Container: A docker container is the running image of docker 
+                     image.
+                     container are lightweight, isolated enviroment that shares the host os kernel.
+==>Docker Hub: cloud based registery provided by docker to use pre built 
+               image and share our image with others.
+==>Docker Registery: it is used to store docker image.
+==>Docker Daemon: dockered the dockerd demon is the background processes that makes 
+                  docker work. it listen for Docker command (like docker run, docker build) and manages images, container, networks, and volumes.
+
+
+
