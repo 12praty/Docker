@@ -1,0 +1,73 @@
+# Docker setup commands
+#
+# Use the section for your operating system. Commands beginning with # are notes
+# and do not need to be run.
+
+===============================================================================
+EC2 — Amazon Linux (dnf)
+===============================================================================
+
+# 1. Update installed packages.
+sudo dnf update -y
+
+# 2. Install Docker.
+sudo dnf install docker -y
+
+# 3. Start Docker now and automatically after future reboots.
+sudo systemctl enable --now docker
+
+# 4. Confirm that the Docker service is running.
+sudo systemctl status docker
+
+# Press q to exit the status screen.
+
+# 5. Check the installed Docker version.
+docker --version
+
+# 6. Test Docker with sudo (before changing user permissions).
+sudo docker ps
+
+# 7. Let the default EC2 user run Docker without sudo.
+sudo usermod -aG docker ec2-user
+
+# IMPORTANT: Log out of the SSH session, then SSH back in for the new group
+# membership to take effect. Alternatively, run: newgrp docker
+
+# 8. Confirm Docker works without sudo.
+docker ps
+
+# 9. Run Docker's test container.
+docker run hello-world
+
+# A successful test includes: Hello from Docker!
+
+
+===============================================================================
+macOS — Docker Desktop (recommended)
+===============================================================================
+
+# Prerequisite: install Homebrew if it is not already installed.
+# See https://brew.sh for its current installation command.
+
+# 1. Install Docker Desktop.
+brew install --cask docker
+
+# 2. Start Docker Desktop. On first launch, approve any prompts and accept the
+# license agreement. Wait until Docker Desktop reports that the engine is running.
+open -a Docker
+
+# 3. Verify the Docker CLI and engine.
+docker --version
+docker info
+docker ps
+
+# 4. Run Docker's test container.
+docker run hello-world
+
+# A successful test includes: Hello from Docker!
+
+# Optional: update Docker Desktop later.
+brew upgrade --cask docker
+
+# Note: Docker Desktop runs Docker inside a lightweight Linux VM on macOS, so
+# systemctl and the Linux docker-group commands are not used on a Mac.
