@@ -1,0 +1,21 @@
+===============================================================================
+Docker command 
+===============================================================================
+$ docker images ==> it will display all the docker images.
+$ docker ps ==> it will display running docker containers.
+$ docker ps -a ==> it will display running docker Container and stoped docker
+				   containner.
+$ docker pull <imageID/imageName> ==> get this from docker registary ==> to downlode 
+  									  docker images.
+$ docker rm <container-id> ==> to delete docker container.
+{note-> docker Containermust be stopped and deleted before deleting docker images}
+$ docker rmi <imageID/imageName> ==> to delete docker images.
+$ docker stop <container ID> ==> to stop docker containner.
+$ docker start <container ID> ==> to start docker containner.
+$ docker run <ImageID/imageName> ==> to run docker image / to run docker Container.
+$ docker system prune -a ==> system cleanup everthing is deleted (stopped container 
+                             unused image).
+$ docker run -d <imageID/imageName> ==> we can run docker
+                                        command in terminal while container is runing {-d represent detach mode}. 
+
+$ docker logs <container ID> ==> to see logs of container.                           										  
