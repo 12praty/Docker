@@ -1,0 +1,36 @@
+# Docker Port Mapping (`-p`)
+
+## What is port mapping?
+
+Port mapping connects a port on your **host machine** to a port inside a **Docker container**. It lets you access an application running in the container from your browser, host machine, or external clients.
+
+## Why is it needed?
+
+By default, containers are isolated and run in their own network namespace. A service running inside a container—for example, an application listening on port `8080`—is not directly accessible from the host or from external clients.
+
+To expose that service, map the container's internal port to a port on the host.
+
+## Syntax
+
+```bash
+docker run -d -p <host-port>:<container-port> <image-name>
+```
+
+- `-d` runs the container in detached mode (in the background).
+- `-p` publishes a container port on the host machine.
+- `<host-port>` is the port you use to reach the application from your machine.
+- `<container-port>` is the port the application listens on inside the container.
+
+## Example
+
+```bash
+docker run -d -p 8484:8080 hacker123shiva/springbt-in-docker:latest
+```
+
+In this example:
+
+- The application runs on port `8080` inside the container.
+- Docker maps it to port `8484` on the host.
+- Access it at `http://localhost:8484`.
+
+In short, `-p` is used for port mapping between the host and a container.

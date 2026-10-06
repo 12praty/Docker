@@ -19,3 +19,5 @@ $ docker run -d <imageID/imageName> ==> we can run docker
                                         command in terminal while container is runing {-d represent detach mode}. 
 
 $ docker logs <container ID> ==> to see logs of container.                           										  
+
+$ docker system prune -a : to clear all data.
