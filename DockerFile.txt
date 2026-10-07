@@ -1,0 +1,37 @@
+Docker File
+===========
+==> contains instruction to build Docker image.
+==> used to specify where is application code what dependencies sre required.
+==> Blue Print of our entire images.
+==> the flowing keywords plays and important role to creating docker file.
+    ->FROM:It is used to specify base image of our application {FROM Python 3.3}.
+
+    ->MAINTAINER:it is used to specify author of docker file. 
+                 {MAINTAINER Pratyush <pratyush@telsko.com}
+
+    ->RUN:used to specify instructions to execute at a time of image creation.
+    	  ex: RUN 'git clone<url>' 
+    	  if required we can run multiple instruction in single docker file and all those instruction will we process in order. 
+
+    ->CMD: is used to specify instruction to execute at a time of docker contain crection
+    	   ex: CMD 'java -jar app.jar'
+    	       CMD 'app.py'
+    	   one docker file can have multiple CMD instruction however docker will proceed only last CMD instruction.
+
+    ->COPY:Used to copy files and directories from the host machine into the Docker 
+           image.
+
+    ->ADD:Used to copy files/directories into the Docker image and can also extract 
+    	  archives or fetch remote URLs.
+
+    ->WORKDIR:Used to set the working directory inside the Docker container.
+
+    ->EXPOSE:Used to specify the port on which the application inside the container 
+             listens.
+
+
+    ->ENTRYPOINT:Used to specify the main command that always runs when the container 
+    			 starts.
+
+    ->USER:Used to specify the user under which commands and the application will run 
+           inside the container.
