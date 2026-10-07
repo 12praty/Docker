@@ -34,3 +34,19 @@ In this example:
 - Access it at `http://localhost:8484`.
 
 In short, `-p` is used for port mapping between the host and a container.
+
+Port Mapping
+=============
+==>docker run -d -p <hostportno> : <containerportno> nameofimage
+==>docker run -d -p 8484:8080 hacker123shiva/springbt-in-docker
+
+-> by default, containers re isolated and run in there own network namespace.
+-> this means services inside a container (say an app running on port number 8080) are
+   not assiable from your host machine or external client.
+-> to expose the services, you must map container's internal port to port on host
+   machine.
+
+-> thats was -p does in docker.
+-> -p is used for port mapping between host and container.
+
+
