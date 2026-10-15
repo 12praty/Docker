@@ -1,0 +1,156 @@
+==>What does Dockerization mean?
+   Dockerization means packaging your application and its runtime environment into a Docker image so that it can run consistently on different machines.
+==>Imagine you've built a Java web application. To run it, you need several things:
+- Java runtime
+- A web server such as Apache Tomcat
+- Your compiled application (.war file)
+- The correct configuration
+Without Docker, you may need to install and configure these separately on every server.
+==>Why do we Dockerize applications?
+1. Portability: Run the same image on your laptop, EC2, or another server with Docker.
+2. Consistency: Reduce differences between development and production environments.
+3. Easy deployment: Build an image once and distribute it through Docker Hub.
+4. Isolation: The application runs in its own container environment.
+5. Scalability: Run additional containers when needed.
+
+==>ou're almost correct! Just one important correction: you don't need a separate Docker server to host your application. Let's understand the whole process.
+How it actually works
+1. Java project
+Your source code
+
+2. Docker image
+Your application + Tomcat + required runtime
+
+3. Docker Hub (optional)
+Stores your image so you can distribute it
+
+4. AWS EC2
+Runs Docker, which starts your container
+
+5. Users access your website
+Using your EC2 public IP and exposed port
+
+
+What does each component do?
+- Docker image: Packages the app with its required runtime environment, helping it run consistently across machines.
+- Docker Hub: A registry that stores and distributes Docker images. You don't have to use Docker Hub; other registries or direct image transfers are possible.
+- EC2: The cloud machine where your application runs.
+- Docker Engine: Runs your image as a container on EC2.
+- Tomcat: Runs your Java web application and handles web requests.
+- Public IP + security group: Lets users reach your application over the network when configured correctly.
+
+==>Create a Maven Java web app or clone the existing java web app from github
+
+==> install maven
+
+$ sudo yum install maven -y
+
+$ mvn archetype:generate -DgroupId=com.telusko -DartifactId=my-web-app -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+$ cd my-web-app
+
+$ vi pom.xml
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.telusko</groupId>
+  <artifactId>my-web-app</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>my-web-app Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>my-web-app</finalName>
+
+    <plugins>
+      <!-- Java 17 support -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>17</source>
+          <target>17</target>
+        </configuration>
+      </plugin>
+
+      <!-- Modern WAR plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.4.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
+=======================================================
+
+$ mvn clean package
+
+
+-------------------------------
+
+Be inside the my-web-app folder/directory
+
+
+$ vi Dockerfile
+
+FROM tomcat:latest
+
+MAINTAINER SatyasheelTelusko
+
+EXPOSE 8080
+
+COPY target/my-web-app.war /usr/local/tomcat/webapps/
+
+$ docker build -t java-web-app
+
+$ docker images
+
+Note : Please login to docker hub before pushing
+
+$ docker tag java-web-app haidertelusko/java-web-app
+
+$ docker push haidertelusko/java-web-app
+
+$ docker run -d -p 8080:8080 java-web-app
+
+==> Enable 8080 in security group of ec2 instance and access the web app use public ip
+
+<public-ip>:8080/my-web-app/
+
+================================================
+$ docker pull haidertelusko/java-web-app:latest
+
+$ docker images
+
+$ docker run -d -p 8080:8080 <image-name/image-id>
+
+$ docker ps
+
+$ docker ps -a
+
+$ docker stop <container-id>
+
+$ docker system prune -a
