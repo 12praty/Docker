@@ -1,0 +1,22 @@
+Create docker image and push it into docker hub
+================================================
+==>create a docker hub account using username and password 
+==>for gmail loging create
+	->Open Docker Hub — Personal Access Tokens.
+    ->Sign in using your Google account.
+	->Click Generate new token.
+	->Give it a name, such as EC2-Push.
+	->Select Read & Write permissions.
+	->Generate and copy the token.
+==>Docker Login : $docker login
+==>enter user name and password
+==>Tag docker image(without tagging we cannot push):
+	$docker tag <image name> <tag name>
+	$docker tag image-1 pratyush8678/image-1:v1-> please specify your docker hub user name in place of pratyush8678
+==> push docker image into docker hub
+    $ docker push <tag-name>
+    $ docker push pratyush8678/image-1:v1 
+    later if you want to pull nd use the image 
+    $ docker pull pratyush8678/image-1 
+
+--------------------------------------------------------------------
