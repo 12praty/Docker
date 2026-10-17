@@ -154,3 +154,16 @@ $ docker ps -a
 $ docker stop <container-id>
 
 $ docker system prune -a
+
+
+Overlay Network (docker swarn)
+=============================
+==>purpose:Used for multi hosting networking specially in Docker swarn mode.
+==>How its works: it allows container runing different Docker hosts(part of swarn cluster) to communicate securely as if they where on same hosts
+==>use case: perfect for orchestration and service descovery in micro service architechture
+
+Macvlan Network
+================
+==>purpose: Assigin a real (physical) Ip address from your Lan to a container
+==>how it works: the container appers as a seperate physical device on network.
+==>Use case : Useful when container need to be accessed directly from other device on physical network (eg: legacy app, network appliances).
